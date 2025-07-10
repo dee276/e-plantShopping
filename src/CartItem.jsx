@@ -7,30 +7,52 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
+  // ✅ Fonction pour calculer le montant total du panier
   const calculateTotalAmount = () => {
- 
+    let total = 0;
+    cart.forEach(item => {
+      const quantity = item.quantity;
+      const cost = parseFloat(item.cost.replace('$', ''));
+      total += quantity * cost;
+    });
+    return total.toFixed(2); // arrondi à 2 décimales
   };
 
+  // ✅ Fonction pour gérer "Continue Shopping"
   const handleContinueShopping = (e) => {
-   
+    e.preventDefault();
+    onContinueShopping();
   };
 
-
-
+  // ✅ Incrémenter la quantité
   const handleIncrement = (item) => {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
+  // ✅ Décrémenter la quantité
   const handleDecrement = (item) => {
-   
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    }
   };
 
+  // ✅ Supprimer un item
   const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
   };
 
-  // Calculate total cost based on quantity for an item
+  // ✅ Calculer le coût total d'un item
   const calculateTotalCost = (item) => {
+    const cost = parseFloat(item.cost.replace('$', ''));
+    return (cost * item.quantity).toFixed(2);
   };
+
+// ✅ Placeholder pour le bouton Checkout
+const handleCheckoutShopping = (e) => {
+  e.preventDefault();
+  alert('Functionality to be added for future reference');
+};
+	
 
   return (
     <div className="cart-container">
@@ -57,12 +79,11 @@ const CartItem = ({ onContinueShopping }) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+          <button className="get-started-button1" onClick={handleCheckoutShopping}>Checkout</button>
       </div>
     </div>
   );
 };
 
 export default CartItem;
-
 
