@@ -67,7 +67,37 @@ function ProductList({ onHomeClick }) {
     setShowCart(false);
   };
 
-  // ... Tu peux déplacer ici ton tableau `plantsArray` comme tu l'avais avant ...
+  // ✅ plantsArray redéfini ici
+  const plantsArray = [
+    {
+      category: 'Air Purifying Plants',
+      plants: [
+        {
+          name: 'Snake Plant',
+          image: 'https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg',
+          description: 'Produces oxygen at night, improving air quality.',
+          cost: '$15',
+        },
+        {
+          name: 'Spider Plant',
+          image: 'https://cdn.pixabay.com/photo/2018/07/11/06/47/chlorophytum-3530413_1280.jpg',
+          description: 'Filters formaldehyde and xylene from the air.',
+          cost: '$12',
+        },
+      ],
+    },
+    {
+      category: 'Aromatic Plants',
+      plants: [
+        {
+          name: 'Lavender',
+          image: 'https://images.unsplash.com/photo-1611909023032-2d6b3134ecba',
+          description: 'Calming scent, used in aromatherapy.',
+          cost: '$20',
+        },
+      ],
+    },
+  ];
 
   return (
     <div>
@@ -87,9 +117,7 @@ function ProductList({ onHomeClick }) {
           <div><a href="#" onClick={handlePlantsClick} style={styleA}>Plants</a></div>
           <div>
             <a href="#" onClick={handleCartClick} style={styleA}>
-              <h1 className="cart">
-                🛒 ({calculateTotalQuantity()})
-              </h1>
+              <h1 className="cart">🛒 ({calculateTotalQuantity()})</h1>
             </a>
           </div>
         </div>
